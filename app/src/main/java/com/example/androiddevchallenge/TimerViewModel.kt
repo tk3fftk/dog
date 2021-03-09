@@ -16,7 +16,11 @@ class TimerViewModel : ViewModel() {
 
     fun updateTimer(value: String) {
         if (!value.isNullOrEmpty()) {
+
             var valueInt = value.toInt()
+            if (timerStarted && (valueInt % 100) == 99 ) {
+                valueInt -= 40
+            }
             if (valueInt <= 0 && timerStarted) {
                 valueInt = 0
                 timerFinished = true
@@ -30,6 +34,10 @@ class TimerViewModel : ViewModel() {
 
     fun startTimer() {
         timerFinished = false
+
+        if ((timerValue % 100) / 60 >= 1.0 ) {
+            timerValue += 40
+        }
 
         timer = Timer()
         timer.schedule(delay = 1000, period = 1000) {
