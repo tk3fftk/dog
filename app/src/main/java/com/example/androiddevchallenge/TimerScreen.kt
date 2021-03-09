@@ -1,9 +1,36 @@
+/*
+ * Copyright 2021 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.example.androiddevchallenge
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.*
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.LocalTextStyle
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
+import androidx.compose.material.Text
+import androidx.compose.material.TextField
+import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -11,9 +38,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.material.TextField
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -88,7 +114,8 @@ private fun TimerButtons(
                 } else {
                     startTimer()
                 }
-            }) {
+            }
+        ) {
             if (timerStarted) {
                 Text(
                     text = "Pause",
@@ -108,7 +135,8 @@ private fun TimerButtons(
             colors = ButtonDefaults.buttonColors(backgroundColor = Color.White),
             onClick = {
                 updateTimer(0.toString())
-            }) {
+            }
+        ) {
             Text(
                 text = "Clear",
                 fontSize = buttonFontSize,
@@ -137,7 +165,6 @@ private fun TimerInput(
     }
 }
 
-
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun TimerInputField(
@@ -160,10 +187,12 @@ fun TimerInputField(
             imeAction = ImeAction.Done,
             keyboardType = KeyboardType.Number
         ),
-        keyboardActions = KeyboardActions(onDone = {
-            onImeAction()
-            keyboardController?.hideSoftwareKeyboard()
-        })
+        keyboardActions = KeyboardActions(
+            onDone = {
+                onImeAction()
+                keyboardController?.hideSoftwareKeyboard()
+            }
+        )
     )
 }
 
@@ -218,10 +247,12 @@ private fun TimerFieldWithInput(
             imeAction = ImeAction.Done,
             keyboardType = KeyboardType.Number
         ),
-        keyboardActions = KeyboardActions(onDone = {
-            onImeAction()
-            keyboardController?.hideSoftwareKeyboard()
-        })
+        keyboardActions = KeyboardActions(
+            onDone = {
+                onImeAction()
+                keyboardController?.hideSoftwareKeyboard()
+            }
+        )
 
     )
     if (timerFinished) {
@@ -237,5 +268,10 @@ private fun TimerFieldWithInput(
 @Preview
 @Composable
 fun DarkPreview() {
-    TimerButtons(stopTimer = { /*TODO*/ }, updateTimer = { /*TODO*/ }, timerStarted = true, startTimer = {})
+    TimerButtons(
+        stopTimer = { /*TODO*/ },
+        updateTimer = { /*TODO*/ },
+        timerStarted = true,
+        startTimer = {}
+    )
 }
