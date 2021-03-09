@@ -46,6 +46,7 @@ fun TimerScreen(timerViewModel: TimerViewModel) {
                 TimerButtons(
                     stopTimer = stopTimer,
                     updateTimer = updateTimer,
+                    startTimer = startTimer,
                     timerStarted = timerStarted,
                 )
                 if (!timerStarted) {
@@ -67,6 +68,7 @@ private fun TimerButtons(
     modifier: Modifier = Modifier,
     stopTimer: () -> Unit,
     updateTimer: (value: String) -> Unit,
+    startTimer: () -> Unit,
     timerStarted: Boolean,
 ) {
     Row(
@@ -81,7 +83,11 @@ private fun TimerButtons(
             modifier = buttonModifier,
             colors = ButtonDefaults.buttonColors(backgroundColor = Color.Gray),
             onClick = {
-                stopTimer()
+                if (timerStarted) {
+                    stopTimer()
+                } else {
+                    startTimer()
+                }
             }) {
             if (timerStarted) {
                 Text(
@@ -231,5 +237,5 @@ private fun TimerFieldWithInput(
 @Preview
 @Composable
 fun DarkPreview() {
-    TimerButtons(stopTimer = { /*TODO*/ }, updateTimer = { /*TODO*/ }, timerStarted = true)
+    TimerButtons(stopTimer = { /*TODO*/ }, updateTimer = { /*TODO*/ }, timerStarted = true, startTimer = {})
 }
